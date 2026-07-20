@@ -1,6 +1,4 @@
-![PsychionalEngineLogo](docs/img/PsychEngineLogoTweak.png)
-
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
+Engine originally used on Vs Jasper by BSD6, intended to be a cooler version of Zefer Xp's ATFS Engine
 
 ## Installation:
 
@@ -59,7 +57,7 @@ There you can learn how to use the 212 PlayState funcions in your mod!
 ![Mod Support](docs/img/ModsMenu.png)
 
 
-## Atleast one change to every week:
+## Changes:
 ### Week 1:
   * New Dad Left sing sprite
   * Unused stage lights are now used
