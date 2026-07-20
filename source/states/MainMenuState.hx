@@ -5,6 +5,18 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
+#if DISCORD_ALLOWED
+import backend.Discord;
+
+import Sys.sleep;
+import sys.thread.Thread;
+import lime.app.Application;
+
+import hxdiscord_rpc.Discord;
+import hxdiscord_rpc.Types;
+
+import flixel.util.FlxStringUtil;
+#end
 
 enum MainMenuColumn {
 	LEFT;
@@ -14,10 +26,13 @@ enum MainMenuColumn {
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.1.2'; // This is also used for Discord RPC
-	public static var psychEngineogVersion:String = '1.0.4';
+
+	public static var psychEngineVersion:String = 'z.0.1.0'; // This is also used for Discord RPC
+	public static var psychEngineogVersion:String = '0.1.2';
+	// public static var discordUser:String = DiscordClient.onReady(DiscordClient.__thread.request("get_current_user"));
 	public static var curSelected:Int = 0;
 	public static var curColumn:MainMenuColumn = CENTER;
+
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -29,7 +44,8 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		#if MODS_ALLOWED 'mods', #end
-		'credits'
+		'credits',
+		'info'
 	];
 
 	var leftOption:String = #if ACHIEVEMENTS_ALLOWED 'achievements' #else null #end;
@@ -94,12 +110,16 @@ class MainMenuState extends MusicBeatState
 			rightItem = createMenuItem(rightOption, FlxG.width - 60, 490);
 			rightItem.x -= rightItem.width;
 		}
-
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "FNFATFS Engine v" + psychEngineVersion, 12);
+		#if DISCORD_ALLOWED
+		var userdisc:FlxText = new FlxText(12, FlxG.height - 84, 0, "Connected Discord User: " + 'not implemented!', 12);
+		userdisc.scrollFactor.set();
+		userdisc.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(userdisc);#end
+		var psychVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Jasper Engine v" + psychEngineVersion, 12);
 		psychVer.scrollFactor.set();
 		psychVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(psychVer);
-		var psychogVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineogVersion, 12);
+		var psychogVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "ATFS Engine v" + psychEngineogVersion, 12);
 		psychogVer.scrollFactor.set();
 		psychogVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(psychogVer);
@@ -324,6 +344,9 @@ class MainMenuState extends MusicBeatState
 								PlayState.SONG.splashSkin = null;
 								PlayState.stageUI = 'normal';
 							}
+						case 'info':
+							persistentUpdate = false;
+							MusicBeatState.switchState(new InfoState());
 						case 'donate':
 							CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 							selectedSomethin = false;
@@ -344,7 +367,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 			#if desktop
-			if (controls.justPressed('debug_1'))
+			if (backend.ClientPrefs.data.devmode && controls.justPressed('debug_1'))
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;

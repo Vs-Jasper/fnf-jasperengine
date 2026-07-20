@@ -41,19 +41,24 @@ class DiscordClient
 		Discord.Shutdown();
 	}
 	
-	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
+	public static function onReady(request:cpp.RawConstPointer<DiscordUser>):String
 	{
 		final user = cast (request[0].username, String);
 		final discriminator = cast (request[0].discriminator, String);
-
-		var message = '(Discord) Connected to User ';
-		if (discriminator != '0') //Old discriminators
+		
+		var message = '(Discord_Discord.hx) Connected to User ';
+		var out = '';
+		if (discriminator != '0'){ //Old discriminators
 			message += '($user#$discriminator)';
-		else //New Discord IDs/Discriminator system
+			out += '$user#$discriminator';
+		} else { //New Discord IDs/Discriminator system
 			message += '($user)';
+			out += '$user';
+		}
 
 		trace(message);
 		changePresence();
+		return out;
 	}
 
 	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void

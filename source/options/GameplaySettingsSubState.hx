@@ -9,7 +9,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Downscroll', //Name
-			'If checked, notes go Down instead of Up, simple enough.', //Description
+			'If checked, notes go Down instead of Up, simple enough.', //Description		devmode
 			'downScroll', //Save data variable name
 			BOOL); //Variable type
 		addOption(option);
@@ -52,7 +52,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',
-			'Funny notes does \"Tick!\" when you hit them.',
+			'Funny notes does "Tick!" when you hit them.',
 			'hitsoundVolume',
 			PERCENT);
 		addOption(option);
@@ -114,6 +114,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.minValue = 2;
 		option.maxValue = 10;
 		option.changeValue = 0.1;
+		addOption(option);
+
+		var option:Option = new Option('Developer Mode', //Name
+			'Enables stuff like the debug buttons and editors.', //Description
+			'devmode', //Save data variable name
+			BOOL); //Variable type
 		addOption(option);
 
 		super();

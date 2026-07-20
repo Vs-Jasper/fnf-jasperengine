@@ -38,6 +38,13 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			["Jasper Engine Team"],
+			["Zefer Xp",		"Zefer",		"Tweaked the engine",												"https://www.youtube.com/@Xpgamingio/",	"ff00c3"],
+			["BSD6",			"B6",			"Director of Vs. Jasper",											"https://www.youtube.com/channel/UCyxbFZTBnVlWPY_llF_UsDQ",	"ff00c3"],
+			[""],
+			["Jasper Engine Discord"],
+			["Join the Vs Jasper Discord!", "discord", "", "https://discord.gg/GPRAWahKuE", "5165F6"],
+			[""],
 			["FNFATFS Engine Team"],
 			["Zefer Xp",		"Zefer",		"Tweaked the engine",												"https://www.youtube.com/@Xpgamingio/",	"ff00c3"],
 			["Engine Contributors"],

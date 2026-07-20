@@ -51,7 +51,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'framerate',
 			INT);
 		addOption(option);
-
+		
 		final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
 		option.minValue = 60;
 		option.maxValue = 240;
@@ -59,6 +59,19 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
 		#end
+
+		var option:Option = new Option('Asset Cap',
+			"Caps the asset limit",
+			'assetlimit',
+			INT);
+		addOption(option);
+		
+		final assetlimit:Int = FlxG.stage.application.window.displayMode.refreshRate;
+		option.minValue = 4;
+		option.maxValue = 50;
+		option.defaultValue = 10;
+		option.displayFormat = '%v Assets';
+		option.onChange = onChangeAssetLimit;
 
 		super();
 		insert(1, boyfriend);
@@ -76,6 +89,20 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	}
 
 	function onChangeFramerate()
+	{
+		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
+		{
+			FlxG.updateFramerate = ClientPrefs.data.framerate;
+			FlxG.drawFramerate = ClientPrefs.data.framerate;
+		}
+		else
+		{
+			FlxG.drawFramerate = ClientPrefs.data.framerate;
+			FlxG.updateFramerate = ClientPrefs.data.framerate;
+		}
+	}
+
+	function onChangeAssetLimit()
 	{
 		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
 		{

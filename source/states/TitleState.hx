@@ -393,7 +393,7 @@ class TitleState extends MusicBeatState
 				});
 				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 			}
-				if (FlxG.keys.pressed.SHIFT && controls.justPressed('debug_1'))
+				if (backend.ClientPrefs.data.devmode && FlxG.keys.pressed.SHIFT && controls.justPressed('debug_1'))
 			{
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
@@ -556,7 +556,7 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(['FNFATFS Engine by'], 40);
+					createCoolText(['Jasper Engine by'], 40);
 				case 4:
 					addMoreText('Zefer Xp', 40);
 					addMoreText('Psych Engine Team', 40);
@@ -565,7 +565,7 @@ class TitleState extends MusicBeatState
 				case 6:
 					createCoolText(['Not associated', 'with'], -40);
 				case 8:
-					addMoreText('PsychEngine', -40);
+					addMoreText('Newgrounds', -40);
 					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
@@ -577,11 +577,11 @@ class TitleState extends MusicBeatState
 				case 13:
 					deleteCoolText();
 				case 14:
-					addMoreText('FNFATFS Engine');
+					addMoreText('Jasper Engine');
 				case 15:
-					addMoreText('Is A Fork Of');
+					addMoreText('By');
 				case 16:
-					addMoreText('Psych Engine'); // credTextShit.text += '\nFunkin';
+					addMoreText('Vs Jasper Team'); // credTextShit.text += '\nFunkin';
 
 				case 17:
 					skipIntro();
