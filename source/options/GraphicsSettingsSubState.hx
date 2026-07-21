@@ -61,7 +61,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		#end
 
 		var option:Option = new Option('Asset Cap',
-			"Caps the asset limit",
+			"Caps the asset limit, doesn't do anything yet.",
 			'assetlimit',
 			INT);
 		addOption(option);
