@@ -44,7 +44,7 @@ class ErrorInfoState extends MusicBeatState
 		else if (controls.ACCEPT) 
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			CoolUtil.browserLoad("https://github.com/ZeferXp/FNF-AtfsEngine/releases");
+			CoolUtil.browserLoad("https://github.com/Vs-Jasper/fnf-jasperengine/releases");
 			MusicBeatState.switchState(new MainMenuState());
 		}
 	}
