@@ -220,6 +220,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	{
 		if(Difficulty.list.length < 1) Difficulty.resetList();
 		_keysPressedBuffer.resize(keysArray.length);
+		FlxG.sound.playMusic(Paths.music("chartEditor"), 0, true);
+		FlxG.sound.music.fadeIn(1, 0, 0.8);
 
 		if(_shouldReset) Conductor.songPosition = 0;
 		persistentUpdate = false;
